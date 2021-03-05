@@ -29,7 +29,7 @@ class ProductController extends Controller
         ]);
 
         $product->save();
-        return redirect('product/list');
+        return redirect('catalog');
     }
 
     public function showProductList() {

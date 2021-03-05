@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,16 +14,22 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [HomeController::class, 'home']);
-Route::post('/product', [ProductController::class, 'createProduct']);
-Route::get('/product/list', [ProductController::class, 'showProductList']);
 
-Route::get('/product/{id}', [ProductController::class, 'showProductId']);
-
-
-
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::post('/product', [ProductController::class, 'createProduct'])
+    ->middleware('auth');
+Route::get('/cart/addToCart/{id}', [CartController::class, 'addToCart'])
+    ->middleware('auth')
+    ->name("addToCart");
+Route::get('/product/list', [ProductController::class, 'showProductList'])
+    ->middleware('auth')
+    ->name("catalog");
+
+Route::get('/review/list', [\App\Http\Controllers\ReviewController::class, 'listReview']);
+
+Route::get('/product/{id}', [ProductController::class, 'showProductId']);
 
 require __DIR__.'/auth.php';

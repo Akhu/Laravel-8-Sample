@@ -1,4 +1,4 @@
-<div class="flex flex-row p-5 shadow rounded-xl">
+<div class="flex flex-row p-5 shadow rounded-xl bg-white">
 
     @if($product->imageUrl !== null)
         <div style="background-image: url('{{ $product->imageUrl }}')" class="bg-contain bg-no-repeat w-24 h-24 rounded"></div>
@@ -6,11 +6,14 @@
         <div class="bg-gradient-to-b from-gray-50 to-gray-100 w-24 h-24 rounded-2xl" >
         </div>
     @endif
-    <div class="flex-col ml-6 flex-grow">
-    <h1 class="text-4xl font-sans text-gray-900 font-black ">
-        {{ $product->name }}
-    </h1>
-    <h2 class="text-blue-500 font-sans font-black text-2xl"> {{ $product->price }} €</h2>
+    <div class="flex-row">
+        <div class="flex-col ml-6 flex-grow">
+            <h1 class="text-4xl font-sans text-gray-900 font-black ">
+                {{ $product->name }}
+            </h1>
+            <h2 class="text-blue-500 font-sans font-black text-2xl"> {{ $product->price }} €</h2>
+        </div>
+        <a href="/product/addToCart?product={{ $product->id }}">Add to cart</a>
     </div>
 </div>
 
